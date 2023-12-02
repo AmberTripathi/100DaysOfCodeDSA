@@ -1,0 +1,20 @@
+class Solution {
+    public int maxArea(int[] height) {
+        int lp=0;//left pointer
+        int rp=height.length-1;//right pointer
+        int mostWater=0;
+        int max=Integer.MIN_VALUE;
+        while(lp!=rp) {
+            mostWater=(rp-lp)*Math.min(height[lp],height[rp]);
+            if(mostWater>max) {
+                max=mostWater;
+            }
+            if(height[lp]<height[rp]) {
+                lp++;
+            }else {
+                rp--;
+            }
+        }
+        return max;
+    }
+}
