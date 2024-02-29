@@ -1,0 +1,26 @@
+public class Solution {
+    public int maxProduct(String[] words) {
+        int[] codes = new int[words.length];
+        for (int i = 0; i < words.length;i ++) {
+            codes[i] = encode(words[i]);
+        }
+        int max = 0;
+        for (int i = 0; i < words.length;i ++) {
+            for (int j = i + 1; j < words.length; j ++) {
+                if ((codes[i]&codes[j]) == 0) {
+                    max = Math.max(max, words[i].length() * words[j].length());
+                }
+            }
+        }
+        return max;
+    }
+    private int encode(String s) {
+        int result = 0;
+        for (int i = 0; i < s.length(); i ++) {
+            char c = s.charAt(i);
+            int mask = 1 << (c - 'a');
+            result = result | mask;
+        }
+        return result;
+    }
+}
